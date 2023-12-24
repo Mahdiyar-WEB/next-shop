@@ -5,11 +5,22 @@ const Button = ({
   onClick,
   disabled = false,
   name = "name",
+  color = "primary",
   className,
 }) => {
+  const getColorClassName = (color) => {
+    const colorClasses = {
+      primary: "btn-primary",
+      info: "btn-info",
+      error: "btn-error",
+      success: "btn-success",
+      warning: "btn-warning",
+    };
+    return colorClasses[color] || "";
+  };
   return (
     <button
-      className={`button__input ${className}`}
+      className={`btn ${getColorClassName(color)} ${className}`}
       type={type}
       onClick={onClick}
       disabled={disabled}
