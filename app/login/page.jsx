@@ -2,11 +2,32 @@
 import React, { useState } from "react";
 import SendOTPForm from "./SendOTPForm";
 import toPersianDigits from "@/utils/toPersianDigits";
-import http from "@/services/httpService";
+import toEnglishDigits from "@/utils/toEnglishDigits";
 import { toast } from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { getOTP, checkOTP } from "@/services/authServices";
+import CheckOTPForm from "./CheckOTPForm";
 
 const Login = () => {
+  const [step, setStep] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [otp, setOtp] = useState("");
+  const {
+    data: getOTPData,
+    error: getOTPError,
+    isPending: getOTPIsPending,
+    mutateAsync: getOTPMutateAsync,
+  } = useMutation({
+    mutationFn: getOTP,
+  });
+  const {
+    data: checkOTPData,
+    error: checkOTPError,
+    isPending: checkOTPIsPending,
+    mutateAsync: checkOTPMutateAsync,
+  } = useMutation({
+    mutationFn: checkOTP,
+  });
 
   const handlePhoneNumberChange = (e) => {
     const digits = toPersianDigits(e.target.value);
@@ -15,20 +36,61 @@ const Login = () => {
   const handleSendOTP = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await http.post("/user/get-otp", { phoneNumber });
-      console.log("🚀 ~ file: page.jsx:18 ~ handleSendOTP ~ data:", data);
+      const convertedPhoneNumber = toEnglishDigits(phoneNumber);
+      const { data } = await getOTPMutateAsync({
+        phoneNumber: convertedPhoneNumber,
+      });
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      setStep(2);
+    }
+  };
+  const handleValidateOTP = async (e) => {
+    e.preventDefault();
+    try {
+      const convertedPhoneNumber = toEnglishDigits(phoneNumber);
+      const convertedOtp = toEnglishDigits(otp);
+      const { data } = await checkOTPMutateAsync({
+        phoneNumber: convertedPhoneNumber,
+        otp: convertedOtp,
+      });
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
   };
+
+  const handleOTPChange = (e) => {
+    const digits = toPersianDigits(e);
+    setOtp(digits);
+  };
+
+  const renderSteps = () => {
+    switch (step) {
+      case 1:
+        return (
+          <SendOTPForm
+            value={phoneNumber}
+            onSubmit={handleSendOTP}
+            onChange={handlePhoneNumberChange}
+            isPending={getOTPIsPending}
+          />
+        );
+      case 2:
+        return (
+          <CheckOTPForm
+            onSubmit={handleValidateOTP}
+            otp={otp}
+            onChange={handleOTPChange}
+            isPending={checkOTPIsPending}
+          />
+        );
+    }
+  };
+
   return (
     <div className="h-[calc(100dvh-230px)] sm:w-full mx-auto grid place-items-center">
-      <div className="w-10/12 sm:max-w-screen-sm md:max-h-96 bg-white grid place-items-center border shadow-md pb-20 pt-4 px-4 rounded-md ">
-        <SendOTPForm
-          value={phoneNumber}
-          onSubmit={handleSendOTP}
-          onChange={handlePhoneNumberChange}
-        />
+      <div className="w-11/12 sm:max-w-screen-sm md:max-h-96 bg-white grid place-items-center border shadow-md pb-20 pt-4 px-4 rounded-md ">
+        {renderSteps()}
       </div>
     </div>
   );
