@@ -48,3 +48,6 @@ html,
 body {
   font-family: var(--vazir-font);
 }
+.otp-container{
+  direction: ltr;
+}
