@@ -4,8 +4,8 @@ const Button = ({
   type = "button",
   onClick,
   disabled = false,
-  name = "name",
-  color = "primary",
+  children = "name",
+  color = "",
   className,
 }) => {
   const getColorClassName = (color) => {
@@ -16,7 +16,7 @@ const Button = ({
       success: "btn-success",
       warning: "btn-warning",
     };
-    return colorClasses[color] || "";
+    return disabled ? "btn-disabled" : colorClasses[color] || "";
   };
   return (
     <button
@@ -25,7 +25,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {name}
+      {children}
     </button>
   );
 };
