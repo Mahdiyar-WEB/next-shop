@@ -15,6 +15,12 @@
     @apply bg-primary-900 text-white 
     hover:bg-primary-800 
   }
+  .btn-info{
+    @apply font-normal text-primary-800
+  }
+  .btn-disabled{
+    @apply font-normal text-secondary-300
+  }
 }
 :root {
   --background-app-rgb: 244, 245, 247;
