@@ -66,7 +66,7 @@ const Login = () => {
       user?.isActive ? router.push("/") : router.push("/edit-profile");
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      router.push("/edit-profile")
+      router.push("/complete-profile")
     }
   };
 
