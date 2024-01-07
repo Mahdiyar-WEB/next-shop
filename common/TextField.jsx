@@ -8,6 +8,7 @@ const TextField = ({
   onChange,
   placeholder,
   maxLength,
+  className = "",
 }) => {
   return (
     <div className="flex flex-col">
@@ -15,7 +16,7 @@ const TextField = ({
         {label}
       </label>
       <input
-        className="textField__input"
+        className={`textField__input ${className}`}
         type={type}
         placeholder={placeholder}
         value={value}
