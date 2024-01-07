@@ -6,3 +6,6 @@ export const getOTP = (payload) => {
 export const checkOTP = (payload) => {
   return http.post("/user/check-otp", payload).then((res) => res.data);
 };
+export const completeProfile = (payload) => {
+  return http.post("/user/complete-profile", payload).then((res) => res.data);
+};
