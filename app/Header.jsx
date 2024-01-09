@@ -18,6 +18,12 @@ const Header = () => {
         <li>
           <Link href="/cart">سبد خرید</Link>
         </li>
+        <li>
+          <Link href="/profile">profile</Link>
+        </li>
+        <li>
+          <Link href="/admin">admin</Link>
+        </li>
         {isLoading ? (
           <div
             className="flex h-6 w-6 animate-spin rounded-full text-primary-900 border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
