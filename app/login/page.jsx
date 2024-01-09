@@ -63,10 +63,12 @@ const Login = () => {
         otp: convertedOtp,
       });
       toast.success(message);
-      user?.isActive ? router.push("/") : router.push("/edit-profile");
+      user?.isActive
+        ? router.push("/")
+        : router.push("/profile/complete-profile");
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      router.push("/complete-profile")
+      router.push("/profile/complete-profile");
     }
   };
 
