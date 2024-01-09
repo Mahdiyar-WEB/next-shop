@@ -14,7 +14,7 @@ app.interceptors.response.use(
   (res) => res,
   async (error) => {
     const errorConfig = error.config;
-    if (err.response.status === 401 && !errorConfig._retry) {
+    if (error.response.status === 401 && !errorConfig._retry) {
       errorConfig._retry = true;
       try {
         const { data } = await axios.get(
@@ -23,10 +23,10 @@ app.interceptors.response.use(
         );
         data && app(errorConfig);
       } catch (error) {
-        Promise.reject(error);
+        return Promise.reject(error);
       }
     }
-    Promise.reject(error);
+    return Promise.reject(error);
   }
 );
 const http = {
