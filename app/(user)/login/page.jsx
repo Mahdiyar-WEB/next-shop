@@ -65,10 +65,10 @@ const Login = () => {
       toast.success(message);
       user?.isActive
         ? router.push("/")
-        : router.push("/profile/complete-profile");
+        : router.push("/complete-profile");
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      router.push("/profile/complete-profile");
+      router.push("/complete-profile");
     }
   };
 
