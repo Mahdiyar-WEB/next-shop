@@ -1,8 +1,7 @@
 import vazirFont from "@/constants/localFonts";
-import "../globals.css";
-import Header from "@/app/(user)/Header";
+import "../../globals.css";
 import { Toaster } from "react-hot-toast";
-import Providers from "../Providers";
+import Providers from "../../Providers";
 
 export const metadata = {
   title: "پنل کاربر",
@@ -15,7 +14,6 @@ export default function RootLayout({ children }) {
       <body className={`${vazirFont.variable} font-sans`}>
         <Providers>
           <Toaster />
-          <Header />
           <main className="container xl:max-w-screen-xl">{children}</main>
         </Providers>
       </body>
