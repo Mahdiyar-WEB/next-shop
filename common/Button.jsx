@@ -7,6 +7,7 @@ const Button = ({
   children = "name",
   color = "",
   className,
+  isPending = false,
 }) => {
   const getColorClassName = (color) => {
     const colorClasses = {
@@ -25,7 +26,16 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {children}
+      {isPending ? (
+        <div
+          className="flex mx-auto h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          role="status"
+        >
+          <span className="!-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"></span>
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 };

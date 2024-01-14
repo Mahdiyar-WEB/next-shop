@@ -24,7 +24,7 @@ const CheckOTPForm = ({
           className="p-0 text-sm flex items-center gap-1"
         >
           ویرایش شماره
-          <HiOutlineArrowNarrowLeft size={17}/>
+          <HiOutlineArrowNarrowLeft size={17} />
         </Button>
       </div>
       <OTPInput
@@ -46,17 +46,8 @@ const CheckOTPForm = ({
         renderSeparator={<span>-</span>}
         renderInput={(props) => <input {...props} />}
       />
-      <Button className="mt-6 w-full" color="primary" type="submit">
-        {isPending ? (
-          <div
-            className="flex mx-auto h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-            role="status"
-          >
-            <span className="!-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"></span>
-          </div>
-        ) : (
-          "تایید کد"
-        )}
+      <Button isPending={isPending} className="mt-6 w-full" color="primary" type="submit">
+        تایید کد
       </Button>
       <Button
         color="info"
