@@ -16,8 +16,7 @@ const CompleteProfile = () => {
   const router = useRouter();
 
   const handleChange = (e) => {
-    const clonedUser = { ...user };
-    clonedUser[e.target.name] = e.target.value;
+    const clonedUser = { ...user, [e.target.name]: e.target.value };
     setUser(clonedUser);
   };
 
