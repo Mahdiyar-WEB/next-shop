@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 const links = [
-  { title: "projects", href: "#projects" },
+  { title: "حساب کاربری", href: "/profile/me" },
   { title: "experiences", href: "#experiences" },
   { title: "skills", href: "#skills" },
   { title: "contact", href: "#contact" },
@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       <body className={`${vazirFont.variable} font-sans`}>
         <Providers>
           <Toaster />
-          <div className="flex relative h-screen">
+          <div className="flex relative h-screen w-screen">
             {/* tablet,desktop size*/}
             <SideBar links={links} />
             {/* mobile size*/}
