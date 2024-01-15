@@ -9,6 +9,7 @@ const TextField = ({
   placeholder,
   maxLength,
   className = "",
+  disabled = false,
 }) => {
   return (
     <div className="flex flex-col">
@@ -16,8 +17,9 @@ const TextField = ({
         {label}
       </label>
       <input
-        className={`textField__input ${className}`}
+        className={`textField__input ${!disabled && 'hover:border-primary-300'} ${className}`}
         type={type}
+        disabled={disabled}
         placeholder={placeholder}
         value={value}
         maxLength={maxLength}
