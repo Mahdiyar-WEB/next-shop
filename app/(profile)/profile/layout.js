@@ -12,9 +12,8 @@ export const metadata = {
 
 const links = [
   { title: "حساب کاربری", href: "/profile/me" },
-  { title: "experiences", href: "#experiences" },
-  { title: "skills", href: "#skills" },
-  { title: "contact", href: "#contact" },
+  { title: "داشبورد", href: "/profile" },
+  { title: "صفحه اصلی", href: "/" },
 ];
 
 export default function RootLayout({ children }) {
