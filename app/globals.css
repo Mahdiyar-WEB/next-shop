@@ -21,6 +21,9 @@
   .btn-info{
     @apply font-normal text-primary-800
   }
+  .btn-danger{
+    @apply bg-error text-white
+  }
   .btn-disabled{
     @apply font-normal text-secondary-300
   }
