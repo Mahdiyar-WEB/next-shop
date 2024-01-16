@@ -13,7 +13,7 @@ const Button = ({
     const colorClasses = {
       primary: "btn-primary",
       info: "btn-info",
-      error: "btn-error",
+      danger: "btn-danger",
       success: "btn-success",
       warning: "btn-warning",
     };
