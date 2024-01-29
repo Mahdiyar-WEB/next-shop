@@ -49,7 +49,7 @@ const Me = () => {
         toast.error(error?.response?.data?.message);
       }
     } else {
-      isEdit && toast.error("اطلاعات تکراری است")
+      isEdit && toast.error("اطلاعات تکراری است");
     }
   };
 
@@ -59,7 +59,7 @@ const Me = () => {
     }
   }, [isEdit]);
 
-  const { data: information } = useAuth();
+  const { data: information, isLoading } = useAuth();
 
   return (
     <main className="mt-7 w-full mx-8">
@@ -89,6 +89,20 @@ const Me = () => {
                 }`}
               />
             ))}
+          <div
+            className={`grid place-items-center h-[${
+              userInformation.keys.length * 95
+            }px] ${!isLoading && "hidden"}`}
+          >
+            <div
+              className={`flex mx-auto h-12 w-12 animate-spin rounded-full border-primary-900 border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] ${
+                !isLoading && "hidden"
+              }`}
+              role="status"
+            >
+              <span className="!-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"></span>
+            </div>
+          </div>
         </div>
         {isEdit ? (
           <div className="flex gap-2">
