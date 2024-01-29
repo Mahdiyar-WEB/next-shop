@@ -4,7 +4,7 @@ import SendOTPForm from "./SendOTPForm";
 import toPersianDigits from "@/utils/toPersianDigits";
 import toEnglishDigits from "@/utils/toEnglishDigits";
 import { toast } from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getOTP, checkOTP } from "@/services/authServices";
 import CheckOTPForm from "./CheckOTPForm";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,7 @@ const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [timer, setTimer] = useState(null);
+  const queryClient = useQueryClient();
   const router = useRouter();
   const {
     data: getOTPData,
@@ -64,6 +65,7 @@ const Login = () => {
         otp: convertedOtp,
       });
       toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: ["get-profile"] }); // this method will call to invalidate our queryClient and update user information
       data?.user?.isActive
         ? router.push("/")
         : router.push("/complete-profile");
