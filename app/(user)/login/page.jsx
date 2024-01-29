@@ -9,7 +9,7 @@ import { getOTP, checkOTP } from "@/services/authServices";
 import CheckOTPForm from "./CheckOTPForm";
 import { useRouter } from "next/navigation";
 
-const RESEND_TIMER = 60;
+const RESEND_TIMER = 90;
 
 const Login = () => {
   const [step, setStep] = useState(1);
@@ -43,13 +43,14 @@ const Login = () => {
     e.preventDefault();
     try {
       const convertedPhoneNumber = toEnglishDigits(phoneNumber);
-      const { data } = await getOTPMutateAsync({
+      const { statusCode, data } = await getOTPMutateAsync({
         phoneNumber: convertedPhoneNumber,
       });
+      statusCode === 200 && setStep(2);
+      toast.success(data.message);
+      setTimer(RESEND_TIMER);
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      setStep(2);
-      setTimer(RESEND_TIMER);
     }
   };
 
@@ -58,23 +59,22 @@ const Login = () => {
     try {
       const convertedPhoneNumber = toEnglishDigits(phoneNumber);
       const convertedOtp = toEnglishDigits(otp);
-      const { user, message } = await checkOTPMutateAsync({
+      const { data } = await checkOTPMutateAsync({
         phoneNumber: convertedPhoneNumber,
         otp: convertedOtp,
       });
-      toast.success(message);
-      user?.isActive
+      toast.success(data.message);
+      data?.user?.isActive
         ? router.push("/")
         : router.push("/complete-profile");
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      router.push("/complete-profile");
     }
   };
 
   const handleOTPChange = (e) => {
     const digits = toPersianDigits(e);
-    setOtp(digits);
+        setOtp(digits);
   };
 
   const handleEditNumber = () => {
