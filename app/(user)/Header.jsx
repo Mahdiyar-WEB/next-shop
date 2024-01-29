@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 
 const Header = () => {
-  const { isLoading, data, error } = useAuth();
+  const { isLoading, data: information, error } = useAuth();
 
   return (
     <header className="shadow-md mb-10">
@@ -19,9 +19,6 @@ const Header = () => {
           <Link href="/cart">سبد خرید</Link>
         </li>
         <li>
-          <Link href="/profile">profile</Link>
-        </li>
-        <li>
           <Link href="/admin">admin</Link>
         </li>
         {isLoading ? (
@@ -33,8 +30,8 @@ const Header = () => {
           </div>
         ) : (
           <li>
-            {data && !error ? (
-              <Link href="/profile">{data.user.name}</Link>
+            {information && !error ? (
+              <Link href="/profile">{information.data.user.name}</Link>
             ) : (
               <Link href="/login">ورود</Link>
             )}
