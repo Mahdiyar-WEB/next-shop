@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 const CompleteProfile = () => {
   const [user, setUser] = useState({ name: "", email: "" });
 
-  const { data, error, isPending, mutateAsync } = useMutation({
+  const { isPending, mutateAsync } = useMutation({
     mutationFn: completeProfile,
   });
 
@@ -23,8 +23,8 @@ const CompleteProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { message } = await mutateAsync(user);
-      toast.success(message);
+      const { data } = await mutateAsync(user);
+      toast.success(data.message);
       router.push("/");
     } catch (error) {
       toast.error(error?.response?.data?.message);
