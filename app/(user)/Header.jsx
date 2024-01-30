@@ -7,7 +7,7 @@ const Header = () => {
   const { isLoading, data: information, error } = useAuth();
 
   return (
-    <header className="shadow-md mb-10">
+    <header className="shadow-md mb-5">
       <ul className="container xl:max-w-screen-xl flex py-4 px-6 lg:px-10 justify-between">
         <li>
           <Link href="/">خانه</Link>
