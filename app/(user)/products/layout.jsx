@@ -1,11 +1,11 @@
-import http from "@/services/httpService";
 import Categories from "./Categories";
+import { getCategories } from "@/services/categoryServices";
 
 export default async function RootLayout({ children }) {
-  const { data } = await http.get("/category/list");
+  const { data } = await getCategories();
   return (
     <section className="flex flex-col lg:flex-row gap-5">
-      <Categories response={data} />
+      <Categories data={data} />
       {children}
     </section>
   );
