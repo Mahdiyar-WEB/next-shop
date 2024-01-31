@@ -50,10 +50,10 @@ module.exports = {
       container: {
         center: true,
       },
-      boxShadow:{
-        "input-focus": '0 12px 24px -8px rgb(var(--color-primary-300))'
-      }
+      boxShadow: {
+        "input-focus": "0 12px 24px -8px rgb(var(--color-primary-300))",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
