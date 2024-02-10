@@ -1,16 +1,23 @@
 "use client";
 import CheckBox from "@/common/CheckBox";
-import {
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useState } from "react";
 
 const Categories = ({ data }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [selectedCategories, setSelectedCategories] = useState(
     searchParams.get("category")?.split(",") || []
+  );
+
+  const createQueryString = useCallback(
+    (name, value) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams]
   );
 
   const handleCategories = ({ target: { value } }) => {
@@ -18,20 +25,22 @@ const Categories = ({ data }) => {
       const otherCategories = selectedCategories.filter(
         (category) => category !== value
       );
-      otherCategories.length
-        ? router.push(`/products?category=${otherCategories.join(",")}`)
-        : router.push("/products");
+      router.push(
+        pathname + "?" + createQueryString("category", otherCategories)
+      );
       setSelectedCategories(otherCategories);
     } else {
       router.push(
-        `/products?category=${[...selectedCategories, value].join(",")}`
+        pathname +
+          "?" +
+          createQueryString("category", [...selectedCategories, value])
       );
       setSelectedCategories([...selectedCategories, value]);
     }
   };
 
   return (
-    <aside className="flex lg:gap-5 py-5 lg:w-[180px] px-5 shadow-md border rounded-md lg:flex-col mx-2">
+    <div className="flex lg:gap-5 py-5 lg:w-[180px] px-5 shadow-md border rounded-md lg:flex-col mx-2">
       <span className="hidden lg:block whitespace-nowrap font-semibold">
         دسته بندی محصولات
       </span>
@@ -51,7 +60,7 @@ const Categories = ({ data }) => {
           );
         })}
       </ul>
-    </aside>
+    </div>
   );
 };
 
