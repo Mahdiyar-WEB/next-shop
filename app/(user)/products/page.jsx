@@ -1,6 +1,8 @@
 import Product from "@/components/Product";
 import { getProducts } from "@/services/productServices";
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic" // this value makes this page SSR but if we use force-static it will be render as SSG
+
+//** Parallel and sequential rendering in next course season 16 (217) */
 
 const Products = async ({ searchParams }) => {
   const { data } = await getProducts(searchParams?.category || "");
