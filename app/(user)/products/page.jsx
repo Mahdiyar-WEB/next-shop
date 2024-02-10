@@ -1,5 +1,6 @@
 import Product from "@/components/Product";
 import { getProducts } from "@/services/productServices";
+export const dynamic = "force-dynamic"
 
 const Products = async ({ searchParams }) => {
   const { data } = await getProducts(searchParams?.category || "");
