@@ -1,5 +1,8 @@
+import Button from "@/common/Button";
 import SingleProduct from "@/components/SingleProduct";
 import { getProductBySlug, getProducts } from "@/services/productServices";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import Link from "next/link";
 import React from "react";
 
 export const dynamic = "force-static"; // this value makes this page SSR but if we use force-static it will be render as SSG
@@ -14,14 +17,20 @@ export const generateStaticParams = async () => {
   }));
 };
 
-const page = async ({ params: { slug } }) => {
+const ProductSlug = async ({ params: { slug } }) => {
   const { data } = await getProductBySlug(slug);
 
   return (
-    <div className="border border-primary-800 bg-red-300 w-full">
+    <section className="w-full px-3 py-3 ">
+      <Button color="info" className="text-md px-0 py-0 mb-3">
+        <Link className="flex items-center px-3 font-semibold" href="/products">
+          <MdOutlineKeyboardArrowRight size={22} />
+          <span>بازگشت</span>
+        </Link>
+      </Button>
       <SingleProduct {...data.product} />
-    </div>
+    </section>
   );
 };
 
-export default page;
+export default ProductSlug;
