@@ -9,6 +9,7 @@ import { MdDone } from "react-icons/md";
 import { MdClear } from "react-icons/md";
 import Badge from "@/common/Badge";
 import Button from "@/common/Button";
+import AddToCart from "./AddToCart";
 
 const Product = ({
   _id,
@@ -105,6 +106,7 @@ const Product = ({
           مشاهده
         </Link>
       </Button>
+      <AddToCart productId={_id} />
     </div>
   );
 };
