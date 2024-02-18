@@ -42,11 +42,11 @@ const Sort = () => {
   };
 
   return (
-    <div className="flex lg:gap-5 py-5 lg:w-[180px] px-5 shadow-md border rounded-md lg:flex-col mx-2">
+    <div className="flex lg:gap-5 py-5 lg:w-[180px] px-5 border rounded-md lg:flex-col mx-2">
       <span className="hidden lg:block whitespace-nowrap font-semibold">
         مرتب سازی محصولات
       </span>
-      <ul className="flex lg:flex-col gap-4 lg:gap-8  text-sm lg:text-base">
+      <ul className="flex lg:flex-col gap-4 text-sm lg:text-base">
         {sortOptions.map(({ id, label, value }) => {
           return (
             <li key={id}>
