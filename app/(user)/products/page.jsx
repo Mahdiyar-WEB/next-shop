@@ -18,7 +18,7 @@ const Products = async ({ searchParams }) => {
 
   return (
     <section className="flex flex-col lg:flex-row gap-5">
-      <aside>
+      <aside className="flex lg:flex-col gap-2">
         <Sort />
         <Categories data={categories} />
       </aside>
