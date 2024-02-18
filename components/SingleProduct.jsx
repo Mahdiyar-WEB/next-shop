@@ -8,8 +8,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
-import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 import { MdClear, MdDone } from "react-icons/md";
+import AddToCart from "./AddToCart";
 
 const SingleProduct = ({
   _id,
@@ -30,27 +30,6 @@ const SingleProduct = ({
   createdAt,
   updatedAt,
 }) => {
-  const { isPending, mutateAsync } = useAddToCart();
-  const { data: information } = useAuth();
-  const queryClient = useQueryClient();
-  const router = useRouter();
-
-  const addToCartHandler = async () => {
-    if (!information) {
-      toast.error("لطفا ابتدا لاگین کنید");
-      router.push("/login");
-      return;
-    }
-
-    try {
-      const { data } = await mutateAsync(_id);
-      toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: ["get-profile"] }); // this method will call to invalidate our queryClient and update user information
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
-  };
-
   return (
     <div className="shadow-lg border px-5 py-3 rounded-md">
       <h1 className="text-2xl font-semibold">{title}</h1>
@@ -107,13 +86,7 @@ const SingleProduct = ({
           );
         })}
       </div>
-      <Button
-        isPending={isPending}
-        onClick={() => addToCartHandler()}
-        color="primary"
-      >
-        اضافه کردن به سبد خرید
-      </Button>
+      <AddToCart productId={_id} />
     </div>
   );
 };
