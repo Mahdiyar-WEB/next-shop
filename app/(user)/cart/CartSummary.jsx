@@ -13,7 +13,7 @@ const CartSummary = ({
       <div className="flex justify-between mb-4">
         <span>جمع کل:</span>
         <p className="flex gap-1 items-center">
-          <span>{toPersianDigits(totalGrossPrice.toLocaleString())}</span>
+          <span>{toPersianDigits(totalGrossPrice)}</span>
           <span className="text-xs text-secondary-600 font-semibold">
             تومان
           </span>
@@ -22,7 +22,7 @@ const CartSummary = ({
       <div className="flex justify-between mb-4">
         <span>تخفیف:</span>
         <p className="flex gap-1 items-center">
-          <span>{toPersianDigits(totalOffAmount.toLocaleString())}</span>
+          <span>{toPersianDigits(totalOffAmount)}</span>
           <span className="text-xs text-secondary-600 font-semibold">
             تومان
           </span>
@@ -32,7 +32,7 @@ const CartSummary = ({
       <div className="flex justify-between mb-8 font-bold">
         <span>مبلغ نهایی:</span>
         <p className="flex gap-1 items-center">
-          <span>{toPersianDigits(totalPrice.toLocaleString())}</span>
+          <span>{toPersianDigits(totalPrice)}</span>
           <span className="text-xs text-secondary-600">تومان</span>
         </p>
       </div>
