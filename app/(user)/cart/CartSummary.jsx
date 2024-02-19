@@ -1,12 +1,30 @@
 import Button from "@/common/Button";
+import { createPayment } from "@/services/paymentServices";
 import toPersianDigits from "@/utils/toPersianDigits";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 
 const CartSummary = ({
   totalPrice = 0,
   totalOffAmount = 0,
   totalGrossPrice = 0,
 }) => {
+  const queryClient = useQueryClient();
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: createPayment,
+  });
+
+  const createPaymentHandler = async () => {
+    try {
+      const { data } = await mutateAsync();
+      queryClient.invalidateQueries({ queryKey: ["get-profile"] });
+      toast.success(data?.message);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   return (
     <aside className="border rounded-lg shadow-md col-span-3 px-3 py-5 h-fit">
       <p className="text-center font-semibold mb-4">اطلاعات پرداخت</p>
@@ -36,7 +54,12 @@ const CartSummary = ({
           <span className="text-xs text-secondary-600">تومان</span>
         </p>
       </div>
-      <Button color="primary" className="w-full">
+      <Button
+        isPending={isPending}
+        onClick={createPaymentHandler}
+        color="primary"
+        className="w-full"
+      >
         ثبت سفارش
       </Button>
     </aside>
