@@ -72,7 +72,7 @@ const Product = ({
         <div className="flex flex-col text-secondary-800">
           <p className="flex items-center gap-[6px]">
             <span className="text-secondary-500 font-medium text-xs line-through">
-              {toPersianDigits(price.toLocaleString())}
+              {toPersianDigits(price)}
             </span>
             <p className="bg-red-600 rounded-xl px-2 py-[1px] font-semibold text-xs w-fit text-white">
               % {toPersianDigits(discount)}
@@ -80,14 +80,14 @@ const Product = ({
           </p>
           <p className="flex gap-1 items-center font-semibold">
             <span className="text-sm">
-              {toPersianDigits(offPrice.toLocaleString())}
+              {toPersianDigits(offPrice)}
             </span>
             <span className="text-secondary-500 text-xs ">تومان</span>
           </p>
         </div>
       ) : (
         <p className="flex gap-1 items-center text-sm font-semibold">
-          <span>{toPersianDigits(price.toLocaleString())}</span>
+          <span>{toPersianDigits(price)}</span>
           <span className="text-secondary-500 text-xs ">تومان</span>
         </p>
       )}
