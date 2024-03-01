@@ -27,6 +27,12 @@
   .btn-disabled{
     @apply font-normal text-secondary-300
   }
+  .table__th{
+    @apply border-b-2 border-b-blue-300 p-3 text-right
+  }
+  .table__td{
+    @apply p-3 text-right whitespace-nowrap
+  }
 }
 :root {
   --background-app-rgb: 244, 245, 247;
