@@ -1,16 +1,17 @@
 "use client";
 import useAuth from "@/hooks/useAuth";
-import { data } from "autoprefixer";
 import React from "react";
+import OrdersTable from "../../../components/OrdersTable";
 
 const Profile = () => {
   const { data: information } = useAuth();
   return (
-    <main className="mx-8 mt-7 grid grid-cols-12 gap-4">
-      <div className="flex gap-1 whitespace-nowrap">
+    <main className="mx-8 mt-7 w-full overflow-x-auto gap-4">
+      <div className="flex gap-1 whitespace-nowrap mb-5">
         <span>خوش آمدید</span>
         <span>{information?.data?.user?.name}</span>
       </div>
+      <OrdersTable title="آخرین سفارش شما" displayCount={1} displayPageLink={true} />
     </main>
   );
 };
