@@ -12,6 +12,7 @@ export const metadata = {
 
 const links = [
   { title: "حساب کاربری", href: "/profile/me" },
+  { title: "سفارشات", href: "/profile/orders" },
   { title: "داشبورد", href: "/profile" },
   { title: "صفحه اصلی", href: "/" },
 ];
