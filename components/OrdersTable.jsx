@@ -68,7 +68,7 @@ const OrdersTable = ({
                       key={_id}
                     >
                       <td className="table__td font-semibold">
-                        {index + 1 + (pagination - 1) * 5}
+                        {toPersianDigits(index + 1 + (pagination - 1) * 5)}
                       </td>
                       <td className="table__td">
                         {toPersianDigits(invoiceNumber)}
