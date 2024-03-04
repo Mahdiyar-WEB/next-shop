@@ -10,26 +10,23 @@ import { MdClear } from "react-icons/md";
 import Badge from "@/common/Badge";
 import Button from "@/common/Button";
 import AddToCart from "./AddToCart";
+import LikeProduct from "./LikeProduct";
 
 const Product = ({
   _id,
   title,
   description,
   slug,
-  category,
   imageLink,
   price,
   discount,
   offPrice,
-  brand,
   tags,
   likesCount,
   isLiked,
   countInStock,
   rating,
   numReviews,
-  createdAt,
-  updatedAt,
 }) => {
   return (
     <div className="col-span-12 w-[90%] md:col-span-6 xl:col-span-4 shadow-md border rounded-md px-4 mx-auto">
@@ -49,10 +46,6 @@ const Product = ({
           );
         })}
       </div>
-      <p className="flex cursor-pointer items-center gap-1 border hover:bg-red-600 hover:text-white duration-200 text-red-600 w-fit px-3 py-1 rounded-lg">
-        <span>{isLiked ? <IoHeartSharp size={20} /> : <IoHeartOutline />}</span>
-        <span className="">{toPersianDigits(likesCount)}</span>
-      </p>
       {!!countInStock ? (
         <p className="flex items-center gap-1 bg-green-500 w-fit rounded-lg px-3 py-1 text-sm text-white">
           <span>
@@ -79,9 +72,7 @@ const Product = ({
             </p>
           </p>
           <p className="flex gap-1 items-center font-semibold">
-            <span className="text-sm">
-              {toPersianDigits(offPrice)}
-            </span>
+            <span className="text-sm">{toPersianDigits(offPrice)}</span>
             <span className="text-secondary-500 text-xs ">تومان</span>
           </p>
         </div>
@@ -100,7 +91,7 @@ const Product = ({
           {toPersianDigits(numReviews)}
         </span>
       </p>
-
+      <LikeProduct productId={_id} isLiked={isLiked} likesCount={likesCount} />
       <Button color="primary" className="text-sm px-0 py-0">
         <Link className="px-3 py-2 inline-block" href={`/products/${slug}`}>
           مشاهده
