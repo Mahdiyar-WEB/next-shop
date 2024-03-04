@@ -61,9 +61,7 @@ const SingleProduct = ({
             </p>
           </p>
           <p className="flex gap-1 items-center font-semibold">
-            <span className="text-sm">
-              {toPersianDigits(offPrice)}
-            </span>
+            <span className="text-sm">{toPersianDigits(offPrice)}</span>
             <span className="text-secondary-500 text-xs ">تومان</span>
           </p>
         </div>
