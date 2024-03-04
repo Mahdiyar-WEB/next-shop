@@ -3,11 +3,15 @@ import { getProducts } from "@/services/productServices";
 import Sort from "./Sort";
 import Categories from "./Categories";
 import { getCategories } from "@/services/categoryServices";
+import { cookies } from "next/headers";
+import { toStringCookies } from "@/utils/toStringCookies";
 
 export const dynamic = "force-dynamic"; // this value makes this page SSR but if we use force-static it will be render as SSG
 
 const Products = async ({ searchParams }) => {
-  const getProductsPromise = getProducts(searchParams);
+  const cookiesStore = cookies();
+  const strCookies = toStringCookies(cookiesStore);
+  const getProductsPromise = getProducts(searchParams, strCookies);
   const getCategoriesPromise = getCategories();
 
   //** Parallel and sequential rendering in next course season 16 (217) */
