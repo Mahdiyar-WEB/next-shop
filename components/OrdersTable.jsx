@@ -1,7 +1,7 @@
 "use client";
 import Badge from "@/common/Badge";
 import { userOrdersTableHead } from "@/constants/tableHeads";
-import useAuth from "@/hooks/useAuth";
+import {useAuth} from "@/hooks/useAuth";
 import persianDate from "@/utils/persianDate";
 import toPersianDigits from "@/utils/toPersianDigits";
 import Link from "next/link";

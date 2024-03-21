@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import CartContainer from "./CartContainer";
 import CartSummary from "./CartSummary";
-import useAuth from "@/hooks/useAuth";
+import {useAuth} from "@/hooks/useAuth";
 
 const Cart = () => {
   const { data: information, isLoading } = useAuth();

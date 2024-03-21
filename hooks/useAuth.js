@@ -1,7 +1,8 @@
+import { getAllUsers } from "@/services/adminServices";
 import { getUserProfile } from "@/services/authServices";
 import { useQuery } from "@tanstack/react-query";
 
-const useAuth = () =>
+export const useAuth = () =>
   useQuery({
     queryKey: ["get-profile"],
     queryFn: getUserProfile,
@@ -9,4 +10,10 @@ const useAuth = () =>
     refetchOnWindowFocus: true,
   });
 
-export default useAuth;
+export const useGetUsers = () =>
+  useQuery({
+    queryKey: ["get-profile"],
+    queryFn: getAllUsers,
+    retry: false,
+    refetchOnWindowFocus: true,
+  });

@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/common/Button";
 import TextField from "@/common/TextField";
-import useAuth from "@/hooks/useAuth";
+import {useAuth} from "@/hooks/useAuth";
 import { editProfile } from "@/services/authServices";
 import { areValuesSame, includeObject } from "@/utils/objectUtils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

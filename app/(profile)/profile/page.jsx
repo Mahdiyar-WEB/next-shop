@@ -1,5 +1,5 @@
 "use client";
-import useAuth from "@/hooks/useAuth";
+import {useAuth} from "@/hooks/useAuth";
 import React from "react";
 import OrdersTable from "../../../components/OrdersTable";
 

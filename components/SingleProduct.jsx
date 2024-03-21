@@ -2,7 +2,7 @@
 import Badge from "@/common/Badge";
 import Button from "@/common/Button";
 import { useAddToCart } from "@/hooks/useAddToCart";
-import useAuth from "@/hooks/useAuth";
+import {useAuth} from "@/hooks/useAuth";
 import toPersianDigits from "@/utils/toPersianDigits";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
