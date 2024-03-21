@@ -2,6 +2,7 @@ import vazirFont from "@/constants/localFonts";
 import "../../globals.css";
 import { Toaster } from "react-hot-toast";
 import Providers from "../../Providers";
+import AdminSideBar from "./AdminSideBar";
 
 export const metadata = {
   title: "پنل ادمین",
@@ -14,7 +15,10 @@ export default function RootLayout({ children }) {
       <body className={`${vazirFont.variable} font-sans`}>
         <Providers>
           <Toaster />
-          <main className="container xl:max-w-screen-xl">{children}</main>
+          <div className="flex relative h-screen w-screen">
+            <AdminSideBar />
+            {children}
+          </div>
         </Providers>
       </body>
     </html>
