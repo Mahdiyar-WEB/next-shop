@@ -27,6 +27,12 @@
   .btn-disabled{
     @apply font-normal text-secondary-300
   }
+  .badge-danger{
+    @apply bg-error text-white
+  }
+  .badge-success{
+    @apply bg-success text-white
+  }
   .table__th{
     @apply border-b-2 border-b-blue-300 p-3 text-right
   }
