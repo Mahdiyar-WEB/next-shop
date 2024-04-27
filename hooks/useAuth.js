@@ -12,7 +12,7 @@ export const useAuth = () =>
 
 export const useGetUsers = () =>
   useQuery({
-    queryKey: ["get-profile"],
+    queryKey: ["get-users"],
     queryFn: getAllUsers,
     retry: false,
     refetchOnWindowFocus: true,
