@@ -1,11 +1,14 @@
 "use client";
+import UsersTable from "@/components/UsersTable";
 import { useGetUsers } from "@/hooks/useAuth";
 import React from "react";
 
 const Users = () => {
-  const { data: information } = useGetUsers();
-  console.log("🚀 ~ Users ~ data:", information?.data.users);
-  return <div>Users</div>;
+  return (
+    <main className="mt-7 w-full mx-8">
+      <UsersTable title={"لیست کاربران"} rowsPerPage={5} />
+    </main>
+  );
 };
 
 export default Users;
