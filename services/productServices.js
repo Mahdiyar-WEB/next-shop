@@ -17,6 +17,9 @@ export const getProducts = async (params, cookies) => {
 export const getProductBySlug = async (slug) => {
   return http.get(`/product/slug/${slug}`).then((res) => res.data);
 };
+export const getProductByID = async (id) => {
+  return http.get(`/product/${id}`).then((res) => res.data);
+};
 export const likeProduct = async (productId) => {
   return http.post(`/product/like/${productId}`).then((res) => res.data);
 };
