@@ -1,7 +1,7 @@
 "use client";
 import Badge from "@/common/Badge";
 import { usersTableHead } from "@/constants/tableHeads";
-import { useAuth } from "@/hooks/useAuth";
+import { useGetUsers } from "@/hooks/useAuth";
 import persianDate from "@/utils/persianDate";
 import toPersianDigits from "@/utils/toPersianDigits";
 import Link from "next/link";
@@ -11,13 +11,8 @@ import {
   HiOutlineArrowNarrowRight,
 } from "react-icons/hi";
 
-const UsersTable = ({
-  title,
-  displayCount = null,
-  displayPageLink = false,
-  rowsPerPage = 5,
-}) => {
-  const { data: information } = useAuth();
+const UsersTable = ({ title, displayCount = null, rowsPerPage = 5 }) => {
+  const { data: information } = useGetUsers();
   const [pagination, setPagination] = useState(1);
   const incrementPagination = () => {
     setPagination(pagination + 1);
@@ -43,7 +38,7 @@ const UsersTable = ({
             </tr>
           </thead>
           <tbody>
-            {information?.data.payments
+            {information?.data.users
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .slice(
                 pagination > 1 ? (pagination - 1) * rowsPerPage : 0,
@@ -53,12 +48,12 @@ const UsersTable = ({
                 (
                   {
                     _id,
-                    invoiceNumber,
-                    description,
-                    cart: { productDetail },
-                    amount,
+                    name,
+                    email,
+                    Products,
+                    phoneNumber,
                     createdAt,
-                    status,
+                    isVerifiedPhoneNumber,
                   },
                   index
                 ) => {
@@ -70,15 +65,29 @@ const UsersTable = ({
                       <td className="table__td font-semibold">
                         {toPersianDigits(index + 1 + (pagination - 1) * 5)}
                       </td>
+                      <td className="table__td">{name}</td>
+                      <td className="table__td">{email}</td>
                       <td className="table__td">
-                        {toPersianDigits(invoiceNumber)}
+                        {toPersianDigits(phoneNumber)}
                       </td>
-                      <td className="table__td max-w-[250px] truncate">
-                        {description}
+                      <td className="table__td">
+                        {isVerifiedPhoneNumber ? (
+                          <Badge
+                            className="text-sm mx-auto"
+                            color="success"
+                            title="فعال"
+                          />
+                        ) : (
+                          <Badge
+                            className="text-sm mx-auto"
+                            color="danger"
+                            title="غیرفعال"
+                          />
+                        )}
                       </td>
                       <td className="table__td flex flex-col items-start gap-y-[2px]">
-                        {productDetail.map(({ slug, title, _id }) => (
-                          <Link key={_id} href={`/products/${slug}`}>
+                        {Products.map(({ title, _id }) => (
+                          <Link key={_id} href={`/products`}>
                             <Badge
                               className="text-sm bg-gray-600 text-white"
                               title={title}
@@ -86,27 +95,9 @@ const UsersTable = ({
                           </Link>
                         ))}
                       </td>
-                      <td className="table__td">
-                        <span className="font-semibold">
-                          {toPersianDigits(amount)}
-                        </span>
-                        <span className="text-xs text-secondary-600 font-semibold ps-1">
-                          تومان
-                        </span>
-                      </td>
                       <td className="table__td">{persianDate(createdAt)}</td>
                       <td className="table__td">
-                        {status === "COMPLETED" ? (
-                          <Badge
-                            className="!text-base bg-success text-white"
-                            title="موفق"
-                          />
-                        ) : (
-                          <Badge
-                            className="!text-base bg-error text-white"
-                            title="ناموفق"
-                          />
-                        )}
+                        <Link href={`/admin/users/${_id}`}>مشاهده</Link>
                       </td>
                     </tr>
                   );
@@ -131,10 +122,10 @@ const UsersTable = ({
             <button
               onClick={incrementPagination}
               disabled={
-                pagination * rowsPerPage >= information?.data.payments.length
+                pagination * rowsPerPage >= information?.data.users.length
               }
               className={`${
-                pagination * rowsPerPage >= information?.data.payments.length
+                pagination * rowsPerPage >= information?.data.users.length
                   ? "text-secondary-400"
                   : "text-primary-900"
               } border border-secondary-300 rounded-full p-1`}
@@ -142,14 +133,6 @@ const UsersTable = ({
               <HiOutlineArrowNarrowLeft size={20} />
             </button>
           </div>
-        )}
-        {displayPageLink && (
-          <Link
-            className="!text-blue-500 font-semibold inline-block text-center w-full border-t-2 mt-5 py-2"
-            href="profile/orders"
-          >
-            مشاهده کل سفارشات
-          </Link>
         )}
       </div>
     </>
