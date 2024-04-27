@@ -35,26 +35,64 @@ export const usersTableHead = [
   },
   {
     id: 2,
-    label: "شماره فاکتور",
+    label: "نام",
   },
   {
     id: 3,
-    label: "توضیحات",
+    label: "ایمیل",
   },
   {
     id: 4,
-    label: "محصول",
+    label: "شماره موبایل",
   },
   {
     id: 5,
-    label: "مبلغ",
+    label: "وضعیت حساب",
   },
   {
     id: 6,
-    label: "تاریخ",
+    label: "محصولات",
   },
   {
     id: 7,
-    label: "وضعیت سفارش",
+    label: "تاریخ پیوستن",
+  },
+  {
+    id: 8,
+    label: "مشاهده",
+  },
+];
+export const productsTableHead = [
+  {
+    id: 1,
+    label: "#",
+  },
+  {
+    id: 2,
+    label: "عنوان",
+  },
+  {
+    id: 3,
+    label: "دسته بندی",
+  },
+  {
+    id: 4,
+    label: "قیمت",
+  },
+  {
+    id: 5,
+    label: "تخفیف",
+  },
+  {
+    id: 6,
+    label: "قیمت با تخفیف",
+  },
+  {
+    id: 7,
+    label: "موجودی",
+  },
+  {
+    id: 8,
+    label: "مشاهده",
   },
 ];
