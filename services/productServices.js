@@ -23,3 +23,8 @@ export const getProductByID = async (id) => {
 export const likeProduct = async (productId) => {
   return http.post(`/product/like/${productId}`).then((res) => res.data);
 };
+
+//admin
+export const addProduct = async (data) => {
+  return http.post("/admin/product/add", data).then((res) => res.data);
+};
