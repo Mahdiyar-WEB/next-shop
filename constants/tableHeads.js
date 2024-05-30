@@ -96,3 +96,29 @@ export const productsTableHead = [
     label: "مشاهده",
   },
 ];
+export const categoriesTableHead = [
+  {
+    id: 1,
+    label: "#",
+  },
+  {
+    id: 2,
+    label: "عنوان",
+  },
+  {
+    id: 3,
+    label: "عنوان انگلیسی",
+  },
+  {
+    id: 4,
+    label: "توضیحات",
+  },
+  {
+    id: 5,
+    label: "نوع",
+  },
+  {
+    id: 6,
+    label: "عملیات",
+  }
+];
