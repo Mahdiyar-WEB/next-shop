@@ -14,7 +14,7 @@ const AddToCart = ({ productId }) => {
   const { isPending, mutateAsync } = useAddToCart();
 
   const isInCart =
-    information?.data?.user.cart.products.some(
+    information?.data?.user.cart?.products.some(
       (product) => product.productId === productId
     ) || false;
 
