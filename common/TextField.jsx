@@ -17,7 +17,9 @@ const TextField = ({
         {label}
       </label>
       <input
-        className={`textField__input ${!disabled && 'hover:border-primary-300'} ${className}`}
+        className={`textField__input ${
+          !disabled && "hover:border-primary-300"
+        } ${className}`}
         type={type}
         disabled={disabled}
         placeholder={placeholder}
