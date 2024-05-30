@@ -1,10 +1,14 @@
-import { getProducts } from "@/services/productServices";
-import { useQuery } from "@tanstack/react-query";
+import { addProduct, getProducts } from "@/services/productServices";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
-export const useGetProducts = () =>
+export const useGetProducts = (cookies) =>
   useQuery({
     queryKey: ["get-products"],
-    queryFn: getProducts,
+    queryFn: () => getProducts({}, cookies),
     retry: false,
     refetchOnWindowFocus: true,
   });
+
+export const useAddProduct = () => {
+  return useMutation({ mutationFn: addProduct });
+};
