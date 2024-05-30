@@ -2,6 +2,7 @@
 import { productsTableHead } from "@/constants/tableHeads";
 import { useGetProducts } from "@/hooks/useGetProducts";
 import toPersianDigits from "@/utils/toPersianDigits";
+import { toStringCookies } from "@/utils/toStringCookies";
 import Link from "next/link";
 import React, { useState } from "react";
 import {
@@ -9,9 +10,13 @@ import {
   HiOutlineArrowNarrowRight,
 } from "react-icons/hi";
 
-const ProductsTable = ({ title, displayCount = null, rowsPerPage = 5 }) => {
-  const { data: information } = useGetProducts();
-  console.log("🚀 ~ ProductsTable ~ information:", information)
+const ProductsTable = ({
+  title,
+  displayCount = null,
+  rowsPerPage = 5,
+  cookies,
+}) => {
+  const { data: information } = useGetProducts(cookies);
   const [pagination, setPagination] = useState(1);
   const incrementPagination = () => {
     setPagination(pagination + 1);
@@ -66,14 +71,20 @@ const ProductsTable = ({ title, displayCount = null, rowsPerPage = 5 }) => {
                       </td>
                       <td className="table__td">{title}</td>
                       <td className="table__td">{category.title}</td>
-                      <td className="table__td">{toPersianDigits(price)}</td>
+                      <td className="table__td flex gap-1">
+                        {toPersianDigits(price)}
+                        <span>تومان</span>
+                      </td>
                       <td className="table__td">
                         {toPersianDigits(discount)}%
                       </td>
-                      <td className="table__td flex flex-col items-start gap-y-[2px]">
+                      <td className="table__td flex gap-1">
                         {toPersianDigits(offPrice)}
+                        <span>تومان</span>
                       </td>
-                      <td className="table__td">{countInStock}</td>
+                      <td className="table__td">
+                        {toPersianDigits(countInStock)}
+                      </td>
                       <td className="table__td">
                         <Link href={`/admin/products/${_id}`}>مشاهده</Link>
                       </td>
@@ -100,10 +111,10 @@ const ProductsTable = ({ title, displayCount = null, rowsPerPage = 5 }) => {
             <button
               onClick={incrementPagination}
               disabled={
-                pagination * rowsPerPage >= information?.data.users.length
+                pagination * rowsPerPage >= information?.data.products.length
               }
               className={`${
-                pagination * rowsPerPage >= information?.data.users.length
+                pagination * rowsPerPage >= information?.data.products.length
                   ? "text-secondary-400"
                   : "text-primary-900"
               } border border-secondary-300 rounded-full p-1`}
