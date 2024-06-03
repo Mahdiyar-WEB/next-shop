@@ -28,6 +28,40 @@ export const userOrdersTableHead = [
     label: "وضعیت سفارش",
   },
 ];
+export const adminOrdersTableHead = [
+  {
+    id: 1,
+    label: "#",
+  },
+  {
+    id: 2,
+    label: "شماره فاکتور",
+  },
+  {
+    id: 3,
+    label: "اطلاعات کاربر",
+  },
+  {
+    id: 4,
+    label: "توضیحات",
+  },
+  {
+    id: 5,
+    label: "محصول",
+  },
+  {
+    id: 6,
+    label: "مبلغ",
+  },
+  {
+    id: 7,
+    label: "تاریخ",
+  },
+  {
+    id: 8,
+    label: "وضعیت سفارش",
+  },
+];
 export const usersTableHead = [
   {
     id: 1,
@@ -77,23 +111,27 @@ export const productsTableHead = [
   },
   {
     id: 4,
-    label: "قیمت",
+    label: "تگ ها",
   },
   {
     id: 5,
-    label: "تخفیف",
+    label: "قیمت",
   },
   {
     id: 6,
-    label: "قیمت با تخفیف",
+    label: "تخفیف",
   },
   {
     id: 7,
-    label: "موجودی",
+    label: "قیمت با تخفیف",
   },
   {
     id: 8,
-    label: "مشاهده",
+    label: "موجودی",
+  },
+  {
+    id: 9,
+    label: "عملیات",
   },
 ];
 export const categoriesTableHead = [
@@ -120,5 +158,5 @@ export const categoriesTableHead = [
   {
     id: 6,
     label: "عملیات",
-  }
+  },
 ];
