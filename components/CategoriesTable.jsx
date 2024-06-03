@@ -1,17 +1,24 @@
 "use client";
 import Badge from "@/common/Badge";
+import Button from "@/common/Button";
 import { categoriesTableHead } from "@/constants/tableHeads";
-import { useGetCategories } from "@/hooks/useGetCategories";
+import { useGetCategories, useRemoveCategory } from "@/hooks/useGetCategories";
 import toPersianDigits from "@/utils/toPersianDigits";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { FaRegEdit } from "react-icons/fa";
 import {
   HiOutlineArrowNarrowLeft,
   HiOutlineArrowNarrowRight,
 } from "react-icons/hi";
+import { LuTrash2 } from "react-icons/lu";
 
 const CategoriesTable = ({ title, displayCount = null, rowsPerPage = 5 }) => {
   const { data: information } = useGetCategories();
+  const queryClient = useQueryClient();
+  const { isPending, mutateAsync } = useRemoveCategory();
 
   const [pagination, setPagination] = useState(1);
   const incrementPagination = () => {
@@ -19,6 +26,16 @@ const CategoriesTable = ({ title, displayCount = null, rowsPerPage = 5 }) => {
   };
   const decrementPagination = () => {
     pagination > 1 && setPagination(pagination - 1);
+  };
+
+  const removeCategory = async (id) => {
+    try {
+      const { data } = await mutateAsync(id);
+      toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: ["get-categories"] });
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   return (
@@ -62,8 +79,20 @@ const CategoriesTable = ({ title, displayCount = null, rowsPerPage = 5 }) => {
                         title={type}
                       />
                     </td>
-                    <td className="table__td">
-                      <Link href={`/admin/products/${_id}`}>مشاهده</Link>
+                    <td className="table__td flex gap-4">
+                      <Link
+                        className="text-cyan-700"
+                        href={`/admin/categories/edit/${_id}`}
+                      >
+                        <FaRegEdit size={20} />
+                      </Link>
+                      <Button
+                        onClick={() => removeCategory(_id)}
+                        className="p-0 text-red-500"
+                        isPending={isPending}
+                      >
+                        <LuTrash2 size={20} />
+                      </Button>
                     </td>
                   </tr>
                 );
