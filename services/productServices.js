@@ -28,3 +28,11 @@ export const likeProduct = async (productId) => {
 export const addProduct = async (data) => {
   return http.post("/admin/product/add", data).then((res) => res.data);
 };
+export const removeProduct = async (id) => {
+  return http.delete(`/admin/product/remove/${id}`).then((res) => res.data);
+};
+export const editProduct = async (data) => {
+  return http
+    .patch(`/admin/product/update/${data._id}`, data)
+    .then((res) => res.data);
+};
