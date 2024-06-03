@@ -37,7 +37,6 @@ const AddCategory = () => {
     if (isValidData) {
       try {
         const response = await mutateAsync(category);
-        console.log("🚀 ~ handleSubmitAddCategory ~ response:", response);
         toast.success(response.data.message);
         router.push("/admin/categories");
       } catch (error) {
