@@ -6,7 +6,6 @@ const User = ({ params: { userID } }) => {
   const fetchUser = async () => {
     try {
       const response = await getUserByID(userID);
-      console.log("🚀 ~ fetchUser ~ response:", response);
     } catch (error) {
       console.log(error);
     }
