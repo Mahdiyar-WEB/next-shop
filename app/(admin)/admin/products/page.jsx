@@ -14,13 +14,19 @@ const Products = () => {
       <div className="flex justify-end">
         <Button
           color="primary"
-          className="rounded-md flex gap-2 text-sm items-center"
+          className="rounded-md flex gap-2 p-0 text-sm items-center"
         >
-          <IoMdAddCircle className="mb-[1px]" size={20} />
-          <Link href="/admin/products/add">اضافه کردن محصول</Link>
+          <Link className="flex gap-2 px-3 py-3" href="/admin/products/add">
+            <IoMdAddCircle className="mb-[1px]" size={20} />
+            اضافه کردن محصول
+          </Link>
         </Button>
       </div>
-      <ProductsTable title="لیست محصولات" cookies={strCookies} rowsPerPage={5} />
+      <ProductsTable
+        title="لیست محصولات"
+        cookies={strCookies}
+        rowsPerPage={5}
+      />
     </main>
   );
 };
