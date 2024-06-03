@@ -1,14 +1,20 @@
 "use client";
 import { productsTableHead } from "@/constants/tableHeads";
-import { useGetProducts } from "@/hooks/useGetProducts";
+import { useGetProducts, useRemoveProduct } from "@/hooks/useGetProducts";
 import toPersianDigits from "@/utils/toPersianDigits";
-import { toStringCookies } from "@/utils/toStringCookies";
 import Link from "next/link";
 import React, { useState } from "react";
 import {
   HiOutlineArrowNarrowLeft,
   HiOutlineArrowNarrowRight,
 } from "react-icons/hi";
+import { FaRegEdit } from "react-icons/fa";
+import { IoMdEye } from "react-icons/io";
+import { LuTrash2 } from "react-icons/lu";
+import Badge from "@/common/Badge";
+import Button from "@/common/Button";
+import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const ProductsTable = ({
   title,
@@ -18,11 +24,22 @@ const ProductsTable = ({
 }) => {
   const { data: information } = useGetProducts(cookies);
   const [pagination, setPagination] = useState(1);
+  const { mutateAsync, isPending } = useRemoveProduct();
+  const queryClient = useQueryClient();
   const incrementPagination = () => {
     setPagination(pagination + 1);
   };
   const decrementPagination = () => {
     pagination > 1 && setPagination(pagination - 1);
+  };
+  const removeProductHandler = async (id) => {
+    try {
+      const { data } = await mutateAsync(id);
+      toast.success(data?.message);
+      queryClient.invalidateQueries({ queryKey: ["get-products"] });
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   return (
@@ -58,6 +75,7 @@ const ProductsTable = ({
                     offPrice,
                     discount,
                     countInStock,
+                    tags,
                   },
                   index
                 ) => {
@@ -71,6 +89,19 @@ const ProductsTable = ({
                       </td>
                       <td className="table__td">{title}</td>
                       <td className="table__td">{category.title}</td>
+                      <td className="table__td">
+                        <div className="flex flex-wrap">
+                          {tags.map((tag, index) => {
+                            return (
+                              <Badge
+                                key={index}
+                                className="text-xs bg-gray-600 text-white"
+                                title={tag}
+                              />
+                            );
+                          })}
+                        </div>
+                      </td>
                       <td className="table__td flex gap-1">
                         {toPersianDigits(price)}
                         <span>تومان</span>
@@ -85,8 +116,26 @@ const ProductsTable = ({
                       <td className="table__td">
                         {toPersianDigits(countInStock)}
                       </td>
-                      <td className="table__td">
-                        <Link href={`/admin/products/${_id}`}>مشاهده</Link>
+                      <td className="table__td flex gap-4">
+                        <Link
+                          className="text-cyan-700"
+                          href={`/admin/products/edit/${_id}`}
+                        >
+                          <FaRegEdit size={20} />
+                        </Link>
+                        <Link
+                          className="text-green-600"
+                          href={`/admin/products/${_id}`}
+                        >
+                          <IoMdEye size={20} />
+                        </Link>
+                        <Button
+                          onClick={() => removeProductHandler(_id)}
+                          className="p-0 text-red-500"
+                          isPending={isPending}
+                        >
+                          <LuTrash2 size={20} />
+                        </Button>
                       </td>
                     </tr>
                   );
