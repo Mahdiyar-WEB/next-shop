@@ -7,12 +7,14 @@ const Categories = () => {
   return (
     <main className="mt-7 w-full mx-8">
       <div className="flex justify-end">
-        <Button
+      <Button
           color="primary"
-          className="rounded-md flex gap-2 text-sm items-center"
+          className="rounded-md flex gap-2 p-0 text-sm items-center"
         >
-          <IoMdAddCircle className="mb-[1px]" size={20}/>
-          <Link href="/admin/categories/add">اضافه کردن دسته بندی</Link>
+          <Link className="flex gap-2 px-3 py-3" href="/admin/categories/add">
+            <IoMdAddCircle className="mb-[1px]" size={20} />
+            اضافه کردن دسته بندی
+          </Link>
         </Button>
       </div>
       <CategoriesTable title="لیست دسته بندی ها" rowsPerPage={10} />
