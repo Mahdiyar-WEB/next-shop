@@ -10,6 +10,8 @@ const TextField = ({
   maxLength,
   className = "",
   disabled = false,
+  min = 0,
+  max = 100,
 }) => {
   return (
     <div className="flex flex-col">
@@ -26,6 +28,8 @@ const TextField = ({
         value={value}
         maxLength={maxLength}
         onChange={onChange}
+        min={min}
+        max={max}
         name={name}
         id={name}
       />
